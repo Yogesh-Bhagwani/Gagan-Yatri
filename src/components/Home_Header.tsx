@@ -26,7 +26,7 @@ const Home_Header: React.FC<HomeHeader> = ({ onNavigateToDashboard , onNavigeteT
             onClick={onNavigeteToAdityaL1}
             className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-6 rounded-lg flex items-center gap-2 transition-colors"
           >
-            Aaditya L1
+            Aditya L1
           </button>
 
           <button
