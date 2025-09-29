@@ -75,6 +75,28 @@ export class DataGenerator {
     return data;
   }
 
+  generateTempRatio(count: number): DataPoint[] {
+    const data: DataPoint[] = [];
+    
+    for (let i = 0; i < count; i++) {
+      const timestamp = this.baseTime + i * this.timeStep;
+      const baseValue = 0.04 + Math.sin(i * 0.03) * 0.01;
+      const noise = (Math.random() - 0.5) * 0.005;
+      
+      // Add ratio spikes during CME events
+      const spike = Math.random() > 0.97 ? Math.random() * 0.05 : 0;
+      const value = Math.max(0, baseValue + noise + spike);
+      
+      data.push({
+        timestamp,
+        value,
+        anomaly: value > 0.08
+      });
+    }
+    
+    return data;
+  }
+
   generateLikelihoodScore(count: number): DataPoint[] {
     const data: DataPoint[] = [];
     
@@ -85,8 +107,8 @@ export class DataGenerator {
       
       // Add high probability events
       const event = Math.random() > 0.98 ? 0.3 + Math.random() * 0.5 : 0;
-      // const value = Math.max(0, Math.min(1, baseValue + noise + event));
-      const value = 83 ;
+      const value = Math.max(0, Math.min(1, baseValue + noise + event));
+      // const value = 83 ;
       
       data.push({
         timestamp,
@@ -140,10 +162,16 @@ export class DataGenerator {
       value: Math.max(0, 0.04 + Math.sin(now * 0.00003) * 0.01 + (Math.random() - 0.5) * 0.005),
       anomaly: Math.random() > 0.97
     };
+
+    const tempRatio  = {
+      timestamp: now,
+      value: Math.max(0, 0.04 + Math.sin(now * 0.00003) * 0.01 + (Math.random() - 0.5) * 0.005),
+      anomaly: Math.random() > 0.87
+    }
     
     const likelihoodScore = {
       timestamp: now,
-      value: Math.max(0, Math.min(1, 0.2 + Math.sin(now * 0.00002) * 0.1 + (Math.random() - 0.5) * 0.05))*100 +50,
+      value: Math.max(0, Math.min(1, 0.2 + Math.sin(now * 0.00002) * 0.1 + (Math.random() - 0.5) * 0.05)),
       anomaly: Math.random() > 0.98
     };
     
@@ -151,7 +179,8 @@ export class DataGenerator {
       protonFlux,
       solarWindSpeed,
       heRatio,
-      likelihoodScore
+      likelihoodScore,
+      tempRatio,
     };
   }
 }

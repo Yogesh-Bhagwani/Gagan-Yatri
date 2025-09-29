@@ -25,12 +25,14 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToHome }) => {
   const [solarWindData, setSolarWindData] = useState<DataPoint[]>([]);
   const [heRatioData, setHeRatioData] = useState<DataPoint[]>([]);
   const [likelihoodData, setLikelihoodData] = useState<DataPoint[]>([]);
+  const [tempData  , setTempData] = useState<DataPoint[]>([]);
   const [cmeEvents, setCmeEvents] = useState<any[]>([]);
   
   // UI states
   const [hasAlert, setHasAlert] = useState(false);
   const [lastAlertTime, setLastAlertTime] = useState<Date | null>(null);
   const [currentLikelihood, setCurrentLikelihood] = useState(0);
+  const [currentTemp , setCurrentTemp] = useState<DataPoint[]>([]); 
 
   // Filter states
   const [dateRange, setDateRange] = useState({
@@ -40,7 +42,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToHome }) => {
   const [selectedEvent, setSelectedEvent] = useState('All Events');
   const [parameters, setParameters] = useState({
     flux: true,
-    speed: true,
+    speed: true,  
     temperature: true,
     ratio: true,
     entropy: true
@@ -55,7 +57,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToHome }) => {
       solarWind: dataGenerator.generateSolarWindSpeed(100),
       heRatio: dataGenerator.generateHeRatio(100),
       likelihood: dataGenerator.generateLikelihoodScore(100),
-      events: dataGenerator.generateCMEEvents(20)
+      tempData : dataGenerator.generateTempRatio(10),
+      events: dataGenerator.generateCMEEvents(20),
     };
 
     setProtonFluxData(initialData.protonFlux);
@@ -63,6 +66,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToHome }) => {
     setHeRatioData(initialData.heRatio);
     setLikelihoodData(initialData.likelihood);
     setCmeEvents(initialData.events);
+    setCurrentTemp(initialData.tempData);
     
     // Set current likelihood from last data point
     const lastLikelihood = initialData.likelihood[initialData.likelihood.length - 1];
@@ -85,6 +89,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToHome }) => {
       setSolarWindData(prev => [...prev.slice(-99), realtimeData.solarWindSpeed]);
       setHeRatioData(prev => [...prev.slice(-99), realtimeData.heRatio]);
       setLikelihoodData(prev => [...prev.slice(-99), realtimeData.likelihoodScore]);
+      setTempData(prev =>[...prev.slice(-99), realtimeData.tempRatio] )
       
       // Update current likelihood
       setCurrentLikelihood(realtimeData.likelihoodScore.value);
@@ -172,10 +177,20 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToHome }) => {
                 threshold={0.08}
               />
             )}
+
+            {parameters.ratio && (
+              <Graph
+                title="Temperature vs Time"
+                data={tempData}
+                yLabel=""
+                color="#10b981"
+                threshold={0.08}
+              />
+            )}
             
               <Graph
                 title="Accuracy "
-                data={likelihoodData}
+                data={tempData}
                 yLabel=""
                 color="#ef4444"
                 threshold={threshold}
