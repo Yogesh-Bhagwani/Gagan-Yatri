@@ -1,5 +1,6 @@
 import React from "react";
 import { Calendar, Settings, Download, Upload, Filter } from "lucide-react";
+import Uploadpop from "./UploadPopUp";
 
 
 interface SidebarProps {
@@ -157,16 +158,14 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div> */}
 
-        {/* Export Data */}
-          <div>
-          <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-2 transition-colors">
-            <Upload className="w-4 h-4" />
-            Upload CDF file
-          </button>
+        {/* Upload Data */}
+        <div>
+         <Uploadpop/>
         </div>
 
+        {/* Export Data*/}
         <div>
-          <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-2 transition-colors">
+          <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50">
             <Download className="w-4 h-4" />
             Export Data
           </button>
