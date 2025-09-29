@@ -205,8 +205,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigateToDashboard }) => {
                 className="w-8 h-8 rounded-full"
               />
               <span className="text-slate-400">
-                Built for Hack2Vision 2025 🚀 by Team
-                "Bharatiya Antariksh"
+                {/* Built for Hack2Vision 2025 🚀 by Team
+                "Bharatiya Antariksh" */}
               </span>
             </div>
             
