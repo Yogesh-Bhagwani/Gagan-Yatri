@@ -1,11 +1,13 @@
 import React from 'react';
 import { ArrowRight, Satellite, Zap, Wind, Atom, TrendingUp, Shield } from 'lucide-react';
+import Home_Header from './Home_Header';
 
 interface HomePageProps {
   onNavigateToDashboard: () => void;
+  onNavigateToAdityaL1 : () => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onNavigateToDashboard }) => {
+const HomePage: React.FC<HomePageProps> = ({ onNavigateToDashboard , onNavigateToAdityaL1 }) => {
   const concepts = [
     {
       icon: <Zap className="w-8 h-8 text-orange-400" />,
@@ -42,28 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigateToDashboard }) => {
   return (
     <div className="min-h-screen bg-slate-900 text-white">
       {/* Header */}
-      <div className="bg-slate-800 border-b border-slate-700 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <img 
-              src="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&w=40&h=40" 
-              alt="ISRO Logo" 
-              className="w-10 h-10 rounded-full"
-            />
-            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-              <Satellite className="w-8 h-8 text-orange-400" />
-              Gagan-Yatri
-            </h1>
-          </div>
-          <button
-            onClick={onNavigateToDashboard}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-6 rounded-lg flex items-center gap-2 transition-colors"
-          >
-            Launch Dashboard
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
+      <Home_Header onNavigateToDashboard={onNavigateToDashboard} onNavigeteToAdityaL1={onNavigateToAdityaL1} />
 
       {/* Hero Section */}
       <div className="relative overflow-hidden">
@@ -199,11 +180,11 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigateToDashboard }) => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <img 
+              {/* <img 
                 src="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&w=40&h=40" 
                 alt="ISRO Logo" 
                 className="w-8 h-8 rounded-full"
-              />
+              /> */}
               <span className="text-slate-400">
                 {/* Built for Hack2Vision 2025 🚀 by Team
                 "Bharatiya Antariksh" */}

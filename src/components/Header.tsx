@@ -26,11 +26,11 @@ const Header: React.FC<HeaderProps> = ({ hasAlert, lastAlertTime }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
-            <img 
+            {/* <img 
               src="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&w=40&h=40" 
               alt="ISRO Logo" 
               className="w-10 h-10 rounded-full"
-            />
+            /> */}
             <div>
               <h1 className="text-xl font-bold text-white flex items-center gap-2">
                 <Satellite className="w-6 h-6 text-orange-400" />
